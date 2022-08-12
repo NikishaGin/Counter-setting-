@@ -7,9 +7,11 @@ function App() {
     let [counter, setCounter] = useState(0)
     let [settingsMax, setSettingsMax] = useState(0)
     let [settingsMin, setSettingsMin] = useState(0)
+    let [error, setError] = useState("incorrect value!")
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setSettingsMax(+e.currentTarget.value)
+
     }
 
     const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +27,9 @@ function App() {
     }
 
     const resetButtonHandler = () => {
-        setCounter(0)
+        setCounter(settingsMin)
     }
+
 
     // @ts-ignore
     return (
@@ -49,7 +52,8 @@ function App() {
                         </div>
                     </div>
                     <div className={"buttonInput"}>
-                        <Button onClick={setButtonHandler} variant="contained" color="success">
+                        <Button disabled={settingsMax < 0 || settingsMin < 0} onClick={setButtonHandler}
+                                variant="contained" color="success">
                             SET
                         </Button>
                     </div>
@@ -58,13 +62,14 @@ function App() {
 
             <div className={"Counter"}>
                 <div>
-                    <h2 className={"h2"}>
-                        {counter}
+                    <h2 className={settingsMax < 0 || settingsMin < 0 ? 'error' : "h2"}>
+                        {settingsMax < 0 || settingsMin < 0 ? error : counter}
                     </h2>
                 </div>
                 <div className={"ButtonCounter"}>
                     <div>
-                        <Button disabled={counter === settingsMax} onClick={incButtonHandler} variant="contained" color="success">
+                        <Button disabled={counter === settingsMax} onClick={incButtonHandler} variant="contained"
+                                color="success">
                             INC
                         </Button>
                     </div>
