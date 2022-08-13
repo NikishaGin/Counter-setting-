@@ -1,6 +1,8 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {Button, Stack} from "@mui/material";
+import {UniversalButton} from "./Components/UniversalButton";
+import {UniversalInput} from "./Components/UniversalInput";
+
 
 function App() {
 
@@ -8,15 +10,6 @@ function App() {
     let [settingsMax, setSettingsMax] = useState(0)
     let [settingsMin, setSettingsMin] = useState(0)
     let [error, setError] = useState("incorrect value!")
-
-    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setSettingsMax(+e.currentTarget.value)
-
-    }
-
-    const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setSettingsMin(+e.currentTarget.value)
-    }
 
     const setButtonHandler = () => {
         setCounter(settingsMin)
@@ -30,10 +23,12 @@ function App() {
         setCounter(settingsMin)
     }
 
+    const UtilityFunction = (numMax: number, numMIn: number, title: string, counter: number) =>
+        numMax < 0 || numMIn < 0 || numMax === numMIn
+            ? <div className={"error"}>{title}</div>
+            : <div className={"h2"}>{counter}</div>
 
-    // @ts-ignore
     return (
-
         <div className="App">
             <div className={"Input"}>
                 <div className={'xxx'}>
@@ -41,47 +36,40 @@ function App() {
                         <div className={"maxValue"}>
                             <div>max value:</div>
                             <div>
-                                <input type={"number"} value={settingsMax} onChange={onChangeMaxHandler}/>
+                                <UniversalInput callback={setSettingsMax} callbackValueState={settingsMax}/>
                             </div>
                         </div>
                         <div className={"startValue"}>
                             <div>start value:</div>
                             <div>
-                                <input type={"number"} value={settingsMin} onChange={onChangeMinHandler}/>
+                                <UniversalInput callback={setSettingsMin} callbackValueState={settingsMin}/>
                             </div>
                         </div>
                     </div>
                     <div className={"buttonInput"}>
-                        <Button disabled={settingsMax < 0 || settingsMin < 0} onClick={setButtonHandler}
-                                variant="contained" color="success">
-                            SET
-                        </Button>
+                        <UniversalButton name={"SET"} callback={setButtonHandler} settingsMax={settingsMax}
+                                         settingsMin={settingsMin} counter={counter}/>
                     </div>
                 </div>
             </div>
-
             <div className={"Counter"}>
                 <div>
-                    <h2 className={settingsMax < 0 || settingsMin < 0 ? 'error' : "h2"}>
-                        {settingsMax < 0 || settingsMin < 0 ? error : counter}
+                    <h2>
+                        {UtilityFunction(settingsMax, settingsMin, error, counter)}
                     </h2>
                 </div>
                 <div className={"ButtonCounter"}>
                     <div>
-                        <Button disabled={counter === settingsMax} onClick={incButtonHandler} variant="contained"
-                                color="success">
-                            INC
-                        </Button>
+                        <UniversalButton name={"INC"} callback={incButtonHandler} settingsMax={settingsMax}
+                                         settingsMin={settingsMin} counter={counter}/>
                     </div>
                     <div>
-                        <Button onClick={resetButtonHandler} variant="outlined" color="error">
-                            RESET
-                        </Button>
+                        <UniversalButton name={"RESET"} callback={resetButtonHandler} settingsMax={settingsMax}
+                                         settingsMin={settingsMin} counter={counter}/>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-
 export default App;

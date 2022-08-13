@@ -112,7 +112,7 @@ body {
 }
 
 @keyframes gradient {
-    0% {
+    50% {
         background-position: 0% 0%;
     }
     50% {
@@ -123,84 +123,20 @@ body {
     }
 }
 
-.wave {
-    background: rgb(255 255 255 / 25%);
-    border-radius: 1000% 1000% 0 0;
-    position: fixed;
-    width: 200%;
-    height: 12em;
-    animation: wave 10s -3s linear infinite;
-    transform: translate3d(0, 0, 0);
-    opacity: 0.8;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-}
 
-.wave:nth-of-type(2) {
-    bottom: -1.25em;
-    animation: wave 18s linear reverse infinite;
-    opacity: 0.8;
-}
 
-.wave:nth-of-type(3) {
-    bottom: -2.5em;
-    animation: wave 20s -1s reverse infinite;
-    opacity: 0.9;
-}
 
-@keyframes wave {
 
-    25% {
-        transform: translateX(-25%);
-    }
 
-    50% {
-        transform: translateX(-50%);
-    }
 
-    75% {
-        transform: translateX(-25%);
-    }
-}
 
-/*button {
-    color: #7b81ec;
 
-}
 
-button {
-    margin: 2em auto;
-    display: block;
-    -webkit-appearance: none;
-    border: 6px solid rgba(255,255,255,0.45);
-    border-radius: 50px;
-    padding: 1em 3em;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-clip: padding-box;
-    position: relative;
-    color: #FFF;
-}
-button:before {
-    content: "";
-    width: 100%;
-    height:100%;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    border-radius: 50px;
-    z-index: -1;
-    filter: blur(14px);
-}
-button:after {
-    content: "";
-    width: 100%;
-    height:100%;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border-radius: 50px;
-    z-index: -1;
-    filter: blur(14px);
-}*/
+
+
+
+
+
+
+
+
